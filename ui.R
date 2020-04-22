@@ -28,7 +28,10 @@ fluidPage(
     ),
     
     # Create a spot for the barplot
-    mainPanel(plotOutput("phonePlot"))
+    mainPanel(
+                plotOutput("phonePlot"),
+                tableOutput("view")
+              )
     
   )
 )
