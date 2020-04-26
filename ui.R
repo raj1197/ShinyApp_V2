@@ -6,10 +6,12 @@ library(datasets)
 
 mydb = dbConnect(MySQL(), user='root', password='raj-12345678', dbname='world', host='localhost')
 k = dbGetQuery(mydb,'SELECT * FROM world.serverdata where filename like "/%/%/%/%";')
-filenames = dbGetQuery(mydb,'select distinct(filename) from world .serverdata where filename not in (select filename FROM world.serverdata where filename like "/%/%/%/%")')
+filenames = dbGetQuery(mydb,'select distinct(filename) from world .serverdata where filename not in (select filename FROM world.serverdata where filename like "/%/%/%/%") order by filename')
+filenames_2 = dbGetQuery(mydb,'select distinct(filename) from world.gencore where filename not in (select filename FROM world.gencore where filename like "/%/%/%/%/%/%") order by filename')
+
 l = k[,"filename"]
 li = filenames[,"filename"]
-
+li_2 = filenames_2[,"filename"]
 fluidPage(    
   
   # Give the page a title
@@ -23,6 +25,8 @@ fluidPage(
     sidebarPanel(
       selectInput("region", "Directory:", 
                   choices=li),
+      selectInput("region2", "Directory:", 
+                  choices=li_2),
       hr(),
       helpText("Data from different directories")
     ),
@@ -30,6 +34,7 @@ fluidPage(
     # Create a spot for the barplot
     mainPanel(
                 plotOutput("phonePlot"),
+                plotOutput("line"),
                 tableOutput("view")
               )
     
