@@ -1,9 +1,3 @@
-
-# Rely on the 'WorldPhones' dataset in the datasets
-# package (which generally comes preloaded).
-library(datasets)
-# Use a fluid Bootstrap layout
-
 mydb = dbConnect(MySQL(), user='root', password='raj-12345678', dbname='world', host='localhost')
 k = dbGetQuery(mydb,'SELECT * FROM world.serverdata where filename like "/%/%/%/%";')
 filenames = dbGetQuery(mydb,'select distinct(filename) from world .serverdata where filename not in (select filename FROM world.serverdata where filename like "/%/%/%/%") order by filename')
