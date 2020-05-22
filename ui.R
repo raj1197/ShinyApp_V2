@@ -1,7 +1,9 @@
-mydb = dbConnect(MySQL(), user='root', password='raj-12345678', dbname='world', host='localhost')
-k = dbGetQuery(mydb,'SELECT * FROM world.serverdata where filename like "/%/%/%/%";')
-filenames = dbGetQuery(mydb,'select distinct(filename) from world .serverdata where filename not in (select filename FROM world.serverdata where filename like "/%/%/%/%") order by filename')
-filenames_2 = dbGetQuery(mydb,'select distinct(filename) from world.gencore where filename not in (select filename FROM world.gencore where filename like "/%/%/%/%/%/%") order by filename')
+# This file renders the UI for the App
+#mydb = dbConnect(MySQL(), user='root', password='raj-12345678', dbname='world', host='localhost')
+source('config.R')
+k = dbGetQuery(mydb,'SELECT * FROM serverdata where filename like "/%/%/%/%";')
+filenames = dbGetQuery(mydb,'select distinct(filename) from serverdata where filename not in (select filename FROM serverdata where filename like "/%/%/%/%") order by filename')
+filenames_2 = dbGetQuery(mydb,'select distinct(filename) from gencore where filename not in (select filename FROM gencore where filename like "/%/%/%/%/%/%") order by filename')
 
 l = k[,"filename"]
 li = filenames[,"filename"]
@@ -15,7 +17,7 @@ fluidPage(
   sidebarLayout
   (      
     
-    # Define the sidebar with one input
+    # Define the sidebar with two input
     sidebarPanel(
       selectInput("region", "Directory:", 
                   choices=li),
@@ -25,7 +27,7 @@ fluidPage(
       helpText("Data from different directories")
     ),
     
-    # Create a spot for the barplot
+    # Create a spot for the linechart
     mainPanel(
                 plotOutput("phonePlot"),
                 tableOutput("view"),

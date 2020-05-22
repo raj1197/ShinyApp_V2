@@ -1,8 +1,11 @@
-files = list.files(path='C:/Users/choud/OneDrive/Desktop/ShinyData/gencoreAudit')
+# setting the present working directory for the file
+setwd('C:/ShinyApp')
+source('config.R')
 
-chr <- 'C:/Users/choud/OneDrive/Desktop/ShinyData/gencoreAudit/'
-file_location = paste(chr,files,sep="")
-
+# Reading all the files that have to be inserted into the database 
+data_location = paste(toString(getwd()),'/data/gencoreAudit/',sep="")
+files = list.files(path=data_location)
+file_location = paste(data_location,files,sep="")
 
 for (i in files){print(substr(i, 14, 23))}
 
@@ -16,8 +19,5 @@ for (i in 1:length(data2))
 data_rbind <- do.call("rbind", data2)
 colnames(data_rbind)[c(1,2,3)]<-c("bytes", "filename", "date")
 
-mydb = dbConnect(MySQL(), user='root', password='raj-12345678', dbname='world', host='localhost')
+# writing data to the database
 dbWriteTable(mydb,value = data_rbind,row.names = FALSE,name = "gencore",append = TRUE)
-
-
-
