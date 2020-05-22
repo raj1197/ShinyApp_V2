@@ -3,7 +3,7 @@
 setwd('C:/ShinyApp')
 
 library(data.table)
-library(RMySQL)
+#library(RMySQL)
 library(shiny)
 library(DBI)
 library(RSQLite)
