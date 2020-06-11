@@ -1,6 +1,6 @@
 # This file is to load all the libraries and initalize variables used in other programs
 
-setwd('C:/ShinyApp')
+#setwd('C:/ShinyApp')
 
 library(data.table)
 #library(RMySQL)
