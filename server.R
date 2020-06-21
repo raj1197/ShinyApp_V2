@@ -80,3 +80,5 @@ function(input, output) {
     head(t2, n = 6)
   }, width = '100%', digits = 3, align = 'c', striped = TRUE,  hover = TRUE, bordered = TRUE)
 }
+
+
