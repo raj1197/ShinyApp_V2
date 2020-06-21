@@ -1,5 +1,3 @@
-# Sets the present working directory for the file
-setwd('C:/ShinyApp')
 source('config.R')
 
 # Reading all the files that have to be inserted into the database
